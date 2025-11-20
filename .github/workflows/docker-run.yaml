@@ -27,4 +27,4 @@ jobs:
         run: docker run --rm \
               -e NAUKRI_EMAIL="${NAUKRI_EMAIL}" \
               -e NAUKRI_PASSWORD="${NAUKRI_PASSWORD}" \
-              yourdockerhubusername/naukri-script:latest
+              nandhakumar1505/naukri-script:latest
