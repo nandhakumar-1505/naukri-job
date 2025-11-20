@@ -15,16 +15,15 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PAT }}
-        run: echo "${DOCKERHUB_PAT}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
+        run: |
+          echo "${DOCKERHUB_PAT}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
       - name: Pull Docker image from private repo
         run: docker pull nandhakumar1505/naukri-script:latest
 
       - name: Run Selenium script
-        env:
-          NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
-          NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
-        run: docker run --rm \
-              -e NAUKRI_EMAIL="${NAUKRI_EMAIL}" \
-              -e NAUKRI_PASSWORD="${NAUKRI_PASSWORD}" \
-              nandhakumar1505/naukri-script:latest
+        run: |
+          docker run --rm \
+            -e NAUKRI_EMAIL="${{ secrets.NAUKRI_EMAIL }}" \
+            -e NAUKRI_PASSWORD="${{ secrets.NAUKRI_PASSWORD }}" \
+            nandhakumar1505/naukri-script:latest
